@@ -23,13 +23,24 @@ app.get("/api/hello", function (req, res) {
   res.json({ greeting: "hello API" });
 });
 
-const middleware = (req, res, next) => {
-  req.time = new Date().toString();
-  next();
-};
-
 app.get("/api/:date?", middleware, function (req, res) {
-  res.json({ utc: req.time });
+  const { date } = req.params;
+  let dateObject;
+  if (!date) {
+    dateObject = new Date();
+  } else {
+    dateObject = new Date(date);
+  }
+
+  // Check if the date is valid
+  if (isNaN(dateObject.getTime())) {
+    return res.json({ error: "Invalid Date" });
+  }
+
+  // Format the response
+  const unixTimestamp = dateObject.getTime();
+  const utcString = dateObject.toUTCString();
+  return res.json({ unix: unixTimestamp, utc: utcString });
 });
 
 // listen for requests :)
