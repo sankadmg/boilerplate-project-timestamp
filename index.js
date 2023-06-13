@@ -25,7 +25,6 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?", function (req, res) {
   const { date } = req.params;
-  const timestamp = parseInt(date);
   let dateObject;
   if (!date) {
     dateObject = new Date();
