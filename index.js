@@ -25,13 +25,12 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?", function (req, res) {
   const { date } = req.params;
-  const timestamp = parseInt(date);
 
   let dateObject;
-  if (!timestamp) {
+  if (!date) {
     dateObject = new Date();
   } else {
-    dateObject = new Date(timestamp);
+    dateObject = new Date(date);
   }
 
   // Check if the date is valid
