@@ -29,9 +29,8 @@ app.get("/api/:date?", function (req, res) {
   if (!date) {
     dateObject = new Date();
   } else {
-    const timestamp = parseInt(date);
-
-    if (!isNaN(timestamp)) {
+    if (!isNaN(date)) {
+      const timestamp = parseInt(date);
       dateObject = new Date(timestamp);
     } else {
       dateObject = new Date(date);
