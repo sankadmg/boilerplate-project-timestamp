@@ -25,12 +25,18 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?", function (req, res) {
   const { date } = req.params;
-
+  const timestamp = parseInt(date);
   let dateObject;
   if (!date) {
-    dateObject = new Date(parseInt(date));
+    dateObject = new Date();
   } else {
-    dateObject = new Date(date);
+    const timestamp = parseInt(date);
+
+    if (!isNaN(timestamp)) {
+      dateObject = new Date(timestamp);
+    } else {
+      dateObject = new Date(date);
+    }
   }
 
   // Check if the date is valid
