@@ -28,7 +28,7 @@ app.get("/api/:date?", function (req, res) {
 
   let dateObject;
   if (!date) {
-    dateObject = new Date();
+    dateObject = new Date(parseInt(date));
   } else {
     dateObject = new Date(date);
   }
